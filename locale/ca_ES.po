@@ -1,0 +1,27 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.configuration,default_journal_expense:"
+msgid "Account Journal Expense"
+msgstr "Diari despesses"
+
+msgctxt "field:account.configuration,default_journal_revenue:"
+msgid "Account Journal Revenue"
+msgstr "Diari ingressos"
+
+msgctxt "field:party.party,journal_expense:"
+msgid "Account Journal Expense"
+msgstr "Diari despesses"
+
+msgctxt "field:party.party,journal_revenue:"
+msgid "Account Journal Revenue"
+msgstr "Diari ingressos"
+
+msgctxt "view:account.configuration:"
+msgid "Journal"
+msgstr "Diari"
+
+msgctxt "view:party.party:"
+msgid "Journal"
+msgstr "Diari"
