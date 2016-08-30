@@ -11,7 +11,7 @@ class Invoice:
     __name__ = 'account.invoice'
     __metaclass__ = PoolMeta
 
-    @fields.depends('agent', 'send_address')
+   @fields.depends('type', 'party')
     def on_change_party(self):
         Configuration = Pool().get('account.configuration')
 
