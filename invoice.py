@@ -11,24 +11,33 @@ class Invoice:
     __name__ = 'account.invoice'
     __metaclass__ = PoolMeta
 
-    @fields.depends('agent', 'send_address')
+    @fields.depends('type', 'party')
     def on_change_party(self):
         Configuration = Pool().get('account.configuration')
 
         configuration = Configuration(1)
 
-        super(Invoice, self).on_change_party()
+        res = super(Invoice, self).on_change_party()
 
-        if self.type == 'out' and configuration.default_journal_revenue:
-            self.journal = configuration.default_journal_revenue
-        if self.type == 'in' and configuration.default_journal_expense:
-            self.journal = configuration.default_journal_expense
+        journal = None
+        if self.type in ('out_invoice', 'out_credit_note') \
+                and configuration.default_journal_revenue:
+            journal = configuration.default_journal_revenue
+        if self.type in ('in_invoice', 'in_credit_note') \
+                and configuration.default_journal_expense:
+            journal = configuration.default_journal_expense
 
         if self.party:
-            if self.type == 'out' and self.party.journal_revenue:
-                self.journal = self.party.journal_revenue
-            if self.type == 'in' and self.party.journal_expense:
-                self.journal = self.party.journal_expense
+            if self.type in ('out_invoice', 'out_credit_note') \
+                    and self.party.journal_revenue:
+                journal = self.party.journal_revenue
+            if self.type in ('in_invoice', 'in_credit_note') \
+                    and self.party.journal_expense:
+                journal = self.party.journal_expense
 
-        if not hasattr(self, 'journal'):
-            self.on_change_type() # reset default journal
+        if journal:
+            res['journal'] = journal.id
+            res['journal.rec_name'] = journal.rec_name
+        else:
+            res.update(self.on_change_type()) # reset default journal
+        return res

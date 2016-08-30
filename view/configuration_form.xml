@@ -3,8 +3,8 @@
 The COPYRIGHT file at the top level of this repository contains the full
 copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/separator[@id='invoice']"
-            position="before">
+    <xpath expr="/form/field[@name='default_account_payable']"
+            position="after">
         <separator string="Journal" colspan="4" id="journal"/>
         <label name="default_journal_revenue"/>
         <field name="default_journal_revenue"/>

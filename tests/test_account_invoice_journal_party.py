@@ -3,24 +3,31 @@
 # the full copyright notices and license terms.
 import unittest
 import doctest
-from trytond.tests.test_tryton import ModuleTestCase
-from trytond.tests.test_tryton import suite as test_suite
+import trytond.tests.test_tryton
+from trytond.tests.test_tryton import test_view, test_depends
 from trytond.tests.test_tryton import doctest_setup, doctest_teardown
-from trytond.tests.test_tryton import doctest_checker
 
 
-class AccountInvoiceJournalPartyTestCase(ModuleTestCase):
+class AccountInvoiceJournalPartyTestCase(unittest.TestCase):
     'Test Account Invoice Journal Party module'
-    module = 'account_invoice_journal_party'
+
+    def setUp(self):
+        trytond.tests.test_tryton.install_module('account_invoice_journal_party')
+
+    def test0005views(self):
+        'Test views'
+        test_view('account_invoice_journal_party')
+
+    def test0006depends(self):
+        'Test depends'
+        test_depends()
 
 
 def suite():
-    suite = test_suite()
+    suite = trytond.tests.test_tryton.suite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-            AccountInvoiceJournalPartyTestCase))
-    suite.addTests(doctest.DocFileSuite(
-            'scenario_account_invoice_journal_party.rst',
+        AccountInvoiceJournalPartyTestCase))
+    suite.addTests(doctest.DocFileSuite('scenario_account_invoice_journal_party.rst',
             setUp=doctest_setup, tearDown=doctest_teardown, encoding='utf-8',
-            checker=doctest_checker,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE))
     return suite
