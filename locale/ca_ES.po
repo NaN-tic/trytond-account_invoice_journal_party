@@ -4,7 +4,7 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "field:account.configuration,default_journal_expense:"
 msgid "Account Journal Expense"
-msgstr "Diari despesses"
+msgstr "Diari despeses"
 
 msgctxt "field:account.configuration,default_journal_revenue:"
 msgid "Account Journal Revenue"
@@ -12,7 +12,7 @@ msgstr "Diari ingressos"
 
 msgctxt "field:party.party,journal_expense:"
 msgid "Account Journal Expense"
-msgstr "Diari despesses"
+msgstr "Diari despeses"
 
 msgctxt "field:party.party,journal_revenue:"
 msgid "Account Journal Revenue"
