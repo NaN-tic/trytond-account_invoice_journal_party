@@ -3,7 +3,7 @@
 # copyright notices and license terms.
 from trytond.pool import Pool, PoolMeta
 
-__all__ = ['Invoice']
+__all__ = ['Invoice', 'Sale', 'Purchase']
 
 
 class Invoice:
@@ -41,3 +41,35 @@ class Invoice:
 
         if not hasattr(self, 'journal'):
             self.on_change_type() # reset default journal
+
+
+class Sale:
+    __name__ = 'sale.sale'
+    __metaclass__ = PoolMeta
+
+    def _get_invoice_sale(self):
+        Configuration = Pool().get('account.configuration')
+        configuration = Configuration(1)
+
+        invoice = super(Sale, self)._get_invoice_sale()
+        if invoice.party.journal_revenue:
+            invoice.journal = invoice.party.journal_revenue
+        elif configuration.default_journal_revenue:
+            invoice.journal = configuration.default_journal_revenue
+        return invoice
+
+
+class Purchase:
+    __name__ = 'purchase.purchase'
+    __metaclass__ = PoolMeta
+
+    def _get_invoice_purchase(self):
+        Configuration = Pool().get('account.configuration')
+        configuration = Configuration(1)
+
+        invoice = super(Purchase, self)._get_invoice_purchase()
+        if invoice.party.journal_expense:
+            invoice.journal = invoice.party.journal_expense
+        elif configuration.default_journal_expense:
+            invoice.journal = configuration.default_journal_expense
+        return invoice
