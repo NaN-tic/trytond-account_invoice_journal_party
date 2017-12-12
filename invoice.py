@@ -1,6 +1,7 @@
 # This file is part of account_invoice_journal_party module for Tryton.
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
+from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 
 __all__ = ['Invoice', 'Sale', 'Purchase']
@@ -21,6 +22,7 @@ class Invoice:
         elif self.type == 'in' and configuration.default_journal_expense:
             self.journal = configuration.default_journal_expense
 
+    @fields.depends('journal')
     def on_change_party(self):
         Configuration = Pool().get('account.configuration')
 
@@ -39,8 +41,8 @@ class Invoice:
             if self.type == 'in' and self.party.journal_expense:
                 self.journal = self.party.journal_expense
 
-        if not hasattr(self, 'journal'):
-            self.on_change_type() # reset default journal
+        if not self.journal:
+            self.on_change_type()  # reset default journal
 
 
 class Sale:

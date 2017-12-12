@@ -10,7 +10,9 @@ __all__ = ['Party']
 class Party:
     __name__ = 'party.party'
     __metaclass__ = PoolMeta
-    journal_revenue = fields.Many2One('account.journal', 'Account Journal Revenue',
+    journal_revenue = fields.Many2One(
+        'account.journal', 'Account Journal Revenue',
         domain=[('type', '=', 'revenue')])
-    journal_expense = fields.Many2One('account.journal', 'Account Journal Expense',
+    journal_expense = fields.Many2One(
+        'account.journal', 'Account Journal Expense',
         domain=[('type', '=', 'expense')])

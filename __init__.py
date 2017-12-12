@@ -6,9 +6,11 @@ from . import configuration
 from . import invoice
 from . import party
 
+
 def register():
     Pool.register(
         configuration.Configuration,
+        configuration.ConfigurationDefaultJournal,
         invoice.Invoice,
         invoice.Sale,
         invoice.Purchase,
