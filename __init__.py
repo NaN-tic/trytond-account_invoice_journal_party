@@ -12,7 +12,15 @@ def register():
         configuration.Configuration,
         configuration.ConfigurationDefaultJournal,
         invoice.Invoice,
-        invoice.Sale,
-        invoice.Purchase,
         party.Party,
         module='account_invoice_journal_party', type_='model')
+    Pool.register(
+        invoice.Sale,
+        depends=['sale'],
+        module='account_invoice_journal_party', type_='model'
+    )
+    Pool.register(
+        invoice.Purchase,
+        depends=['purchase'],
+        module='account_invoice_journal_party', type_='model'
+    )
