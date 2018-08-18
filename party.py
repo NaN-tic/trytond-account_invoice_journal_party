@@ -7,9 +7,8 @@ from trytond.pool import PoolMeta
 __all__ = ['Party']
 
 
-class Party:
+class Party(metaclass=PoolMeta):
     __name__ = 'party.party'
-    __metaclass__ = PoolMeta
     journal_revenue = fields.Many2One(
         'account.journal', 'Account Journal Revenue',
         domain=[('type', '=', 'revenue')])

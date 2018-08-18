@@ -7,9 +7,8 @@ from trytond.pool import Pool, PoolMeta
 __all__ = ['Invoice', 'Sale', 'Purchase']
 
 
-class Invoice:
+class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
-    __metaclass__ = PoolMeta
 
     def on_change_type(self):
         Configuration = Pool().get('account.configuration')
@@ -45,9 +44,8 @@ class Invoice:
             self.on_change_type()  # reset default journal
 
 
-class Sale:
+class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
-    __metaclass__ = PoolMeta
 
     def _get_invoice_sale(self):
         Configuration = Pool().get('account.configuration')
@@ -61,9 +59,8 @@ class Sale:
         return invoice
 
 
-class Purchase:
+class Purchase(metaclass=PoolMeta):
     __name__ = 'purchase.purchase'
-    __metaclass__ = PoolMeta
 
     def _get_invoice_purchase(self):
         Configuration = Pool().get('account.configuration')

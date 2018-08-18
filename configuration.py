@@ -11,9 +11,8 @@ from trytond.modules.company.model import CompanyValueMixin
 __all__ = ['Configuration']
 
 
-class Configuration:
+class Configuration(metaclass=PoolMeta):
     __name__ = 'account.configuration'
-    __metaclass__ = PoolMeta
     default_journal_revenue = fields.MultiValue(fields.Many2One(
             'account.journal', "Account Journal Revenue",
             domain=[('type', '=', 'revenue')]))

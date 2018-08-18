@@ -82,10 +82,10 @@ Create Out invoice::
     >>> invoice.type = 'out'
     >>> invoice.party = party1
     >>> invoice.journal.rec_name
-    u'Revenue'
+    'Revenue'
     >>> invoice.party = party2
     >>> invoice.journal.rec_name
-    u'Party Revenue'
+    'Party Revenue'
 
 Create In invoice::
 
@@ -93,7 +93,7 @@ Create In invoice::
     >>> invoice.type = 'in'
     >>> invoice.party = party1
     >>> invoice.journal.rec_name
-    u'Expense'
+    'Expense'
     >>> invoice.party = party2
     >>> invoice.journal.rec_name
-    u'Party Expense'
+    'Party Expense'
