@@ -16,9 +16,11 @@ class Invoice:
         super(Invoice, self).on_change_type()
 
         configuration = Configuration(1)
-        if self.type == 'out' and configuration.default_journal_revenue:
+        if (self.type in ('out_invoice', 'out_credit_note')
+                and configuration.default_journal_revenue):
             self.journal = configuration.default_journal_revenue
-        elif self.type == 'in' and configuration.default_journal_expense:
+        elif (self.type in ('in_invoice', 'in_credit_note')
+                and configuration.default_journal_expense):
             self.journal = configuration.default_journal_expense
 
     def on_change_party(self):
@@ -28,15 +30,19 @@ class Invoice:
 
         super(Invoice, self).on_change_party()
 
-        if self.type == 'out' and configuration.default_journal_revenue:
+        if (self.type in ('out_invoice', 'out_credit_note')
+                and configuration.default_journal_revenue):
             self.journal = configuration.default_journal_revenue
-        if self.type == 'in' and configuration.default_journal_expense:
+        if (self.type in ('in_invoice', 'in_credit_note')
+                and configuration.default_journal_expense):
             self.journal = configuration.default_journal_expense
 
         if self.party:
-            if self.type == 'out' and self.party.journal_revenue:
+            if (self.type in ('out_invoice', 'out_credit_note')
+                    and self.party.journal_revenue):
                 self.journal = self.party.journal_revenue
-            if self.type == 'in' and self.party.journal_expense:
+            if (self.type in ('in_invoice', 'in_credit_note')
+                    and self.party.journal_expense):
                 self.journal = self.party.journal_expense
 
         if not hasattr(self, 'journal'):

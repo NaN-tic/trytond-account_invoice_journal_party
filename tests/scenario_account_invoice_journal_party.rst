@@ -93,7 +93,7 @@ Create Out invoice::
 
     >>> Invoice = Model.get('account.invoice')
     >>> invoice = Invoice()
-    >>> invoice.type = 'out'
+    >>> invoice.type = 'out_invoice'
     >>> invoice.party = party1
     >>> invoice.journal.rec_name
     u'Revenue'
@@ -104,7 +104,7 @@ Create Out invoice::
 Create In invoice::
 
     >>> invoice = Invoice()
-    >>> invoice.type = 'in'
+    >>> invoice.type = 'in_invoice'
     >>> invoice.party = party1
     >>> invoice.journal.rec_name
     u'Expense'
