@@ -53,11 +53,11 @@ class Sale:
     __name__ = 'sale.sale'
     __metaclass__ = PoolMeta
 
-    def _get_invoice_sale(self):
+    def _get_invoice_sale(self, invoice_type):
         Configuration = Pool().get('account.configuration')
         configuration = Configuration(1)
 
-        invoice = super(Sale, self)._get_invoice_sale()
+        invoice = super(Sale, self)._get_invoice_sale(invoice_type)
         if invoice.party.journal_revenue:
             invoice.journal = invoice.party.journal_revenue
         elif configuration.default_journal_revenue:
@@ -69,11 +69,11 @@ class Purchase:
     __name__ = 'purchase.purchase'
     __metaclass__ = PoolMeta
 
-    def _get_invoice_purchase(self):
+    def _get_invoice_purchase(self, invoice_type):
         Configuration = Pool().get('account.configuration')
         configuration = Configuration(1)
 
-        invoice = super(Purchase, self)._get_invoice_purchase()
+        invoice = super(Purchase, self)._get_invoice_purchase(invoice_type)
         if invoice.party.journal_expense:
             invoice.journal = invoice.party.journal_expense
         elif configuration.default_journal_expense:
