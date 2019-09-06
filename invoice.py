@@ -21,7 +21,7 @@ class Invoice(metaclass=PoolMeta):
         elif self.type == 'in' and configuration.default_journal_expense:
             self.journal = configuration.default_journal_expense
 
-    @fields.depends('journal')
+    @fields.depends('journal', 'type')
     def on_change_party(self):
         Configuration = Pool().get('account.configuration')
 
