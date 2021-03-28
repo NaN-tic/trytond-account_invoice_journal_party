@@ -53,7 +53,7 @@ Default configuration journals::
 Create new journals::
 
     >>> Sequence = Model.get('ir.sequence')
-    >>> sequence_journal, = Sequence.find([('code', '=', 'account.journal')])
+    >>> sequence_journal, = Sequence.find([('sequence_type.name', '=', 'Account Journal')])
     >>> journal_revenue = Journal()
     >>> journal_revenue.name = 'Party Revenue'
     >>> journal_revenue.type = 'revenue'
