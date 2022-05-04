@@ -5,6 +5,7 @@ from trytond import backend
 from trytond.model import ModelSQL, fields
 from trytond.pool import PoolMeta, Pool
 from trytond.tools.multivalue import migrate_property
+from trytond.pyson import Eval
 
 from trytond.modules.company.model import CompanyValueMixin
 
@@ -33,10 +34,14 @@ class ConfigurationDefaultJournal(ModelSQL, CompanyValueMixin):
     __name__ = 'account.configuration.default_journal'
     default_journal_revenue = fields.Many2One(
         'account.journal', "Account Journal Revenue",
-        domain=[('type', '=', 'revenue')])
+        domain=[('type', '=', 'revenue')],  context={
+            'company': Eval('company'),
+            }, depends=['company'])
     default_journal_expense = fields.Many2One(
         'account.journal', "Account Journal Expense",
-        domain=[('type', '=', 'expense')])
+        domain=[('type', '=', 'expense')], context={
+            'company': Eval('company'),
+            }, depends=['company'])
 
     @classmethod
     def __register__(cls, module_name):
