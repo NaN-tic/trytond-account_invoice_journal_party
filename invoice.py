@@ -10,10 +10,14 @@ __all__ = ['Invoice', 'Sale', 'Purchase']
 class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
 
+    @fields.depends('type')
     def on_change_type(self):
         Configuration = Pool().get('account.configuration')
 
-        super(Invoice, self).on_change_type()
+        try:
+            super(Invoice, self).on_change_type()
+        except:
+            pass
 
         configuration = Configuration(1)
         if self.type == 'out' and configuration.default_journal_revenue:
