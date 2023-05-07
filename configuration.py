@@ -4,7 +4,6 @@
 from trytond import backend
 from trytond.model import ModelSQL, fields
 from trytond.pool import PoolMeta, Pool
-from trytond.tools.multivalue import migrate_property
 from trytond.pyson import Eval
 
 from trytond.modules.company.model import CompanyValueMixin
@@ -42,23 +41,3 @@ class ConfigurationDefaultJournal(ModelSQL, CompanyValueMixin):
         domain=[('type', '=', 'expense')], context={
             'company': Eval('company'),
             }, depends=['company'])
-
-    @classmethod
-    def __register__(cls, module_name):
-        exist = backend.TableHandler.table_exist(cls._table)
-
-        super(ConfigurationDefaultJournal, cls).__register__(module_name)
-
-        if not exist:
-            cls._migrate_property([], [], [])
-
-    @classmethod
-    def _migrate_property(cls, field_names, value_names, fields):
-        field_names.extend(
-            ['default_journal_revenue', 'default_journal_expense'])
-        value_names.extend(
-            ['default_journal_revenue', 'default_journal_expense'])
-        fields.append('company')
-        migrate_property(
-            'account.configuration', field_names, cls, value_names,
-            fields=fields)
