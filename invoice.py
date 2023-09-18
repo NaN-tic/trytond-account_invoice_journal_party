@@ -11,13 +11,10 @@ class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
 
     @fields.depends('type')
-    def on_change_type(self):
+    def set_journal(self):
         Configuration = Pool().get('account.configuration')
 
-        try:
-            super(Invoice, self).on_change_type()
-        except:
-            pass
+        super(Invoice, self).set_journal()
 
         configuration = Configuration(1)
         if self.type == 'out' and configuration.default_journal_revenue:
@@ -27,25 +24,12 @@ class Invoice(metaclass=PoolMeta):
 
     @fields.depends('journal', 'type')
     def on_change_party(self):
-        Configuration = Pool().get('account.configuration')
-
-        configuration = Configuration(1)
-
         super(Invoice, self).on_change_party()
-
-        if self.type == 'out' and configuration.default_journal_revenue:
-            self.journal = configuration.default_journal_revenue
-        if self.type == 'in' and configuration.default_journal_expense:
-            self.journal = configuration.default_journal_expense
-
         if self.party:
             if self.type == 'out' and self.party.journal_revenue:
                 self.journal = self.party.journal_revenue
             if self.type == 'in' and self.party.journal_expense:
                 self.journal = self.party.journal_expense
-
-        if not self.journal:
-            self.on_change_type()  # reset default journal
 
 
 class Sale(metaclass=PoolMeta):
