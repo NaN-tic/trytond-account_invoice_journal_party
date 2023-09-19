@@ -11,10 +11,10 @@ class Invoice(metaclass=PoolMeta):
     __name__ = 'account.invoice'
 
     @fields.depends('type')
-    def set_journal(self):
+    def set_journal(self, pattern=None):
         Configuration = Pool().get('account.configuration')
 
-        super(Invoice, self).set_journal()
+        super(Invoice, self).set_journal(pattern)
 
         configuration = Configuration(1)
         if self.type == 'out' and configuration.default_journal_revenue:
