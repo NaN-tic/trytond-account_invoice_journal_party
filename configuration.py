@@ -31,10 +31,10 @@ class ConfigurationDefaultJournal(ModelSQL, CompanyValueMixin):
     default_journal_revenue = fields.Many2One(
         'account.journal', "Account Journal Revenue",
         domain=[('type', '=', 'revenue')],  context={
-            'company': Eval('company'),
+            'company': Eval('company', -1),
             }, depends=['company'])
     default_journal_expense = fields.Many2One(
         'account.journal', "Account Journal Expense",
         domain=[('type', '=', 'expense')], context={
-            'company': Eval('company'),
+            'company': Eval('company', -1),
             }, depends=['company'])
