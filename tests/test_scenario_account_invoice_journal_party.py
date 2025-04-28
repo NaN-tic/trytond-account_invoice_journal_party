@@ -48,17 +48,9 @@ class Test(unittest.TestCase):
 
         # Create new journals
         Sequence = Model.get('ir.sequence')
-        sequence_journal, = Sequence.find([('sequence_type.name', '=',
-                                            'Account Journal')])
-        journal_revenue = Journal()
-        journal_revenue.name = 'Party Revenue'
-        journal_revenue.type = 'revenue'
-        journal_revenue.sequence = sequence_journal
+        journal_revenue = Journal(name='Party Revenue', type='revenue')
         journal_revenue.save()
-        journal_expense = Journal()
-        journal_expense.name = 'Party Expense'
-        journal_expense.type = 'expense'
-        journal_expense.sequence = sequence_journal
+        journal_expense = Journal(name='Party Expense', type='expense')
         journal_expense.save()
 
         # Create parties with journal
