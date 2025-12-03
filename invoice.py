@@ -50,11 +50,11 @@ class Sale(metaclass=PoolMeta):
 class Purchase(metaclass=PoolMeta):
     __name__ = 'purchase.purchase'
 
-    def _get_invoice_purchase(self):
+    def _get_invoice(self):
         Configuration = Pool().get('account.configuration')
         configuration = Configuration(1)
 
-        invoice = super(Purchase, self)._get_invoice_purchase()
+        invoice = super(Purchase, self)._get_invoice()
         if invoice.party.journal_expense:
             invoice.journal = invoice.party.journal_expense
         elif configuration.default_journal_expense:
