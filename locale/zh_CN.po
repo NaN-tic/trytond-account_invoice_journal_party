@@ -1,0 +1,52 @@
+#
+msgid ""
+msgstr ""
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "field:account.configuration,default_journal_expense:"
+msgid "Account Journal Expense"
+msgstr "费用日记账"
+
+msgctxt "field:account.configuration,default_journal_revenue:"
+msgid "Account Journal Revenue"
+msgstr "收入日记账"
+
+msgctxt "field:party.party,journal_expense:"
+msgid "Account Journal Expense"
+msgstr "费用日记账"
+
+msgctxt "field:party.party,journal_revenue:"
+msgid "Account Journal Revenue"
+msgstr "收入日记账"
+
+msgctxt "view:account.configuration:"
+msgid "Journal"
+msgstr "日记账"
+
+msgctxt "view:party.party:"
+msgid "Journal"
+msgstr "日记账"
+
+msgctxt "field:account.configuration.default_journal,company:"
+msgid "Company"
+msgstr "公司"
+
+msgctxt "field:account.configuration.default_journal,default_journal_expense:"
+msgid "Account Journal Expense"
+msgstr "费用日记账"
+
+msgctxt "field:account.configuration.default_journal,default_journal_revenue:"
+msgid "Account Journal Revenue"
+msgstr "收入日记账"
+
+msgctxt "model:account.configuration.default_journal,name:"
+msgid "Account Configuration Default Journal"
+msgstr "默认日记账配置"
+
+msgctxt "model:account.configuration.default_journal,string:"
+msgid "Account Configuration Default Journal"
+msgstr "默认日记账配置"
